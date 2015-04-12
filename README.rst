@@ -4,7 +4,7 @@ At some point in development you wish you were just automatically logged into
 the django admin as a super user. This middleware lets you do just that. As you
 probably understand this also poses a security risk. To minimize the chances of
 this middleware automatically logging someone in as a super user in a
-production environment you will need to take som extra steps when installing it.
+production environment you will need to take some extra steps when installing.
 
 
 Installation
