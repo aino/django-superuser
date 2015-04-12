@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 
 class SuperUserMiddleware(object):
     def process_request(self, request):
-        user = getattr(request, 'user')
+        user = getattr(request, 'user', None)
         if (user is None or user.is_anonymous() and
                 settings.DEBUG and
                 request.META['REMOTE_ADDR'] in settings.INTERNAL_IPS and
