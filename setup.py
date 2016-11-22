@@ -3,12 +3,12 @@ from setuptools import setup
 
 setup(
     name='django-superuser',
-    version='0.1.0',
+    version='0.2.0',
     description='Middleware that gives you super powers.',
     long_description=open('README.rst').read(),
     author='Mikko Hellsing',
-    author_email='mikko@aino.com',
-    url='http://github.com/aino/django-superuser',
+    author_email='mikkohellsing@gmail.com',
+    url='http://github.com/sorl/django-superuser',
     packages=['superuser'],
     license='ICS',
     classifiers=[
@@ -19,7 +19,7 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
         'Framework :: Django',
     ],
     zip_safe=False

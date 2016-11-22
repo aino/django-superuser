@@ -13,7 +13,7 @@ First you need enter the middleware in your setting file, it needs to be at
 some line after the
 ``django.contrib.auth.middleware.AuthenticationMiddleware``::
 
-    MIDDLEWARE_CLASSES = (
+    MIDDLEWARE = (
         ...
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'superuser.middleware.SuperUserMiddleware',
@@ -35,3 +35,18 @@ Note that the login page (usually ``/admin/login/``) does not log you in
 automatically as a super user, this is so that you can login as a different
 user if you like.  If you want to be logged in as a super user, just navigate
 to any other admin view, for example ``/admin/``.
+
+
+Django version < 1.10
+---------------------
+If you are using Django version < 1.10 you need to use the old style middleware
+classes and you need install django-supervisor version < 0.2.0. Please set up
+middleware like this instead after the line:
+``django.contrib.auth.middleware.AuthenticationMiddleware``::
+
+    MIDDLEWARE_CLASSES = (
+        ...
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'superuser.middleware.SuperUserMiddleware',
+        ...
+    )

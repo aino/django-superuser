@@ -4,8 +4,11 @@ from django.contrib import auth
 from django.db import DEFAULT_DB_ALIAS
 
 
-class SuperUserMiddleware(object):
-    def process_request(self, request):
+class SuperUserMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
         user = getattr(request, 'user', None)
         if (user is None or user.is_anonymous() and
                 settings.DEBUG and
@@ -33,3 +36,4 @@ class SuperUserMiddleware(object):
                 user = manager.create(**user_data)
             user.backend = 'SuperUserBackend'
             auth.login(request, user)
+            return self.get_response(request)
