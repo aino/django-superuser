@@ -2,18 +2,15 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib import auth
 from django.db import DEFAULT_DB_ALIAS
+from django.utils.deprecation import MiddlewareMixin
 
 
-class SuperUserMiddleware:
-    def __init__(self, get_response):
-        self.get_response = get_response
-
-    def __call__(self, request):
+class SuperUserMiddleware(MiddlewareMixin):
+    def process_request(self, request):
         user = getattr(request, 'user', None)
         if (user is None or user.is_anonymous() and
                 settings.DEBUG and
                 request.META['REMOTE_ADDR'] in settings.INTERNAL_IPS and
-                request.path.startswith(reverse('admin:index')) and  # we are using the admin app
                 request.path != reverse('admin:login')):  # we are not on the admin login page
             try:
                 from django.contrib.auth import get_user_model
@@ -36,4 +33,3 @@ class SuperUserMiddleware:
                 user = manager.create(**user_data)
             user.backend = 'SuperUserBackend'
             auth.login(request, user)
-        return self.get_response(request)
