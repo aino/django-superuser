@@ -36,4 +36,4 @@ class SuperUserMiddleware:
                 user = manager.create(**user_data)
             user.backend = 'SuperUserBackend'
             auth.login(request, user)
-            return self.get_response(request)
+        return self.get_response(request)

@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='django-superuser',
-    version='0.2.0',
+    version='0.2.1',
     description='Middleware that gives you super powers.',
     long_description=open('README.rst').read(),
     author='Mikko Hellsing',
