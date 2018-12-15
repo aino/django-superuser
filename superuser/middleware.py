@@ -1,14 +1,26 @@
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.contrib import auth
 from django.db import DEFAULT_DB_ALIAS
 from django.utils.deprecation import MiddlewareMixin
+
+try:
+    from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
+
+
+def is_anonymous(user):
+    if user is None:
+        return True
+    if callable(user.is_anonymous):
+        return user.is_anonymous()
+    return user.is_anonymous
 
 
 class SuperUserMiddleware(MiddlewareMixin):
     def process_request(self, request):
         user = getattr(request, 'user', None)
-        if (user is None or user.is_anonymous() and
+        if (is_anonymous(user) and
                 settings.DEBUG and
                 request.META['REMOTE_ADDR'] in settings.INTERNAL_IPS and
                 request.path != reverse('admin:login')):  # we are not on the admin login page
