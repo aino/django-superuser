@@ -11,6 +11,7 @@ setup(
     author_email='mikko@sumusm.se',
     url='http://github.com/sorl/django-superuser',
     packages=['superuser'],
+    include_package_data=True,
     zip_safe=False,
     license='ICS',
     classifiers=[
